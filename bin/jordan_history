@@ -1,1 +1,5 @@
 #!/usr/bin/env ruby
+
+require_relative "../lib/jordan_history"
+
+JordanHistory::CLI.new.start
