@@ -1,0 +1,77 @@
+class JordanHistory::CLI
+
+    def start
+        JordanHistory::Scraper.scrape_jordan_info
+        intro
+        display_jordans
+        menu
+        user_input
+        goodbye
+    end
+
+    def intro
+        puts""
+        puts "       
+         d8888 8888888 8888888b.         888888  .d88888b.  8888888b.  8888888b.        d8888 888b    888 
+        d88888   888   888   Y88b           88b d88P   Y88b 888   Y88b 888   Y88b      d88888 8888b   888 
+       d88P888   888   888    888           888 888     888 888    888 888    888     d88P888 88888b  888 
+      d88P 888   888   888   d88P           888 888     888 888   d88P 888    888    d88P 888 888Y88b 888 
+     d88P  888   888   8888888P             888 888     888 8888888P   888    888   d88P  888 888 Y88b888 
+    d88P   888   888   888 T88b             888 888     888 888 T88b   888    888  d88P   888 888  Y88888 
+   d8888888888   888   888  T88b            88P Y88b. .d88P 888  T88b  888  .d88P d8888888888 888   Y8888 
+  d88P     888 8888888 888   T88b           888   Y88888P   888   T88b 8888888P  d88P     888 888    Y888 
+                                          .d88P                                                           
+                                        .d88P                                                            
+                                       888P                                               "
+        puts "\n"
+        puts "```````````````````````````````````````````````````````````````````````````````````````````````````````````"
+        puts "Welcome!!! Michael Jordan is considered to be THE GOAT in the sport of Basketball."
+        puts "\n"
+        puts "```````````````````````````````````````````````````````````````````````````````````````````````````````````"
+    end
+
+    def display_jordans
+        JordanHistory::Sneaker.all.each.with_index(1) do |sneaker, index|
+            "#{index}. #{sneaker.name}".split("")
+        end
+    end
+
+    def display_jordan
+        JordanHistory::Sneaker.all.each.with_index(1) do |sneaker, index|
+        end
+    end
+
+    def menu
+        puts "\n~ Please make a selection to learn more about THE GOAT's sneakers by selecting a number from the list above."
+        puts "~ To end this program, type 'exit'."
+        puts "~ What would you like to do?"
+    end
+
+    def user_input
+        input = nil
+        while input != "exit"
+        input = gets.strip.downcase
+
+            if input.to_i.between?(1, JordanHistory::Sneaker.all.length - 1)
+                selected_jordan
+            elsif
+                input == "exit"
+                goodbye
+            else
+                invalid_request
+            end
+        end
+    end
+
+    def invalid_request
+        "That is not a valid request, please select a number from the list."
+        puts "\n"
+        display_jordans
+        menu
+    end
+
+    def goodbye
+        puts "Thanks for visiting!!!"
+        exit
+    end
+end
