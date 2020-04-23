@@ -12,3 +12,12 @@ results = doc.css("p.jordanPrice")[0].text
 <!-- this css selector is for each Jordan designer -->
 results = doc.css("p.jordanDesigner")[0].text
 puts results
+
+info = results.map do |el|
+            {
+            name: el.css("p.jordanName").text,
+            release_date: el.css("p.jordanDate").text,
+            og_price: el.css("p.jordanPrice").text,
+            designer: el.css("p.jordanDesigner").text,
+            description: el.css("p.jordanInfo").text
+            }

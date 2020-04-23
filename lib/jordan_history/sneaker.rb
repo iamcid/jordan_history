@@ -1,18 +1,13 @@
 class JordanHistory::Sneaker
 
-    def self.create(name, release_date, og_price, designer, description)
-        sneaker = self.new(name, release_date, og_price, designer, description)
-        save
-    end
-
     def self.all
         @@all
     end
 
-    def self.find(input)
-        self.all[input-1]
+    def self.find_by_index(index)
+        @@all[index]
     end
-    
+
     attr_accessor :name, :release_date, :og_price, :designer, :description
 
     @@all = []
@@ -23,6 +18,7 @@ class JordanHistory::Sneaker
         @og_price = og_price
         @designer = designer
         @description = description
+        save
     end
 
     def save

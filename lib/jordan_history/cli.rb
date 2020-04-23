@@ -5,8 +5,7 @@ class JordanHistory::CLI
         intro
         display_jordans
         menu
-        user_input
-        goodbye
+        selection
     end
 
     def intro
@@ -23,55 +22,64 @@ class JordanHistory::CLI
                                           .d88P                                                           
                                         .d88P                                                            
                                        888P                                               "
-        puts "\n"
+        puts ""
         puts "```````````````````````````````````````````````````````````````````````````````````````````````````````````"
         puts "Welcome!!! Michael Jordan is considered to be THE GOAT in the sport of Basketball."
-        puts "\n"
+        puts ""
         puts "```````````````````````````````````````````````````````````````````````````````````````````````````````````"
+        puts ""
+        sleep 2
     end
 
     def display_jordans
-        JordanHistory::Sneaker.all.each.with_index(1) do |sneaker, index|
-            "#{index}. #{sneaker.name}".split("")
-        end
-    end
-
-    def display_jordan
-        JordanHistory::Sneaker.all.each.with_index(1) do |sneaker, index|
+        sneakers = JordanHistory::Sneaker.all
+        sneakers.each.with_index(1).each do |sneaker, index| 
+            puts "#{index}. #{sneaker.name}"
         end
     end
 
     def menu
-        puts "\n~ Please make a selection to learn more about THE GOAT's sneakers by selecting a number from the list above."
+        puts ""
+        puts "~ Please make a selection to learn more about THE GOAT's sneakers by selecting a number from the list above."
         puts "~ To end this program, type 'exit'."
         puts "~ What would you like to do?"
+        puts ""
     end
 
-    def user_input
+    def selection
         input = nil
         while input != "exit"
-        input = gets.strip.downcase
+        input = gets.strip
 
-            if input.to_i.between?(1, JordanHistory::Sneaker.all.length - 1)
-                selected_jordan
-            elsif
-                input == "exit"
-                goodbye
-            else
-                invalid_request
+            if input.to_i > 0 && input.to_i < 35
+                jordan = JordanHistory::Sneaker.find_by_index(input.to_i - 1)
+                puts "Name - #{jordan.name}"
+                puts "Release Date - #{jordan.release_date}"
+                puts "Original Price - #{jordan.og_price}"
+                puts "Designer - #{jordan.designer}"
+                puts "Description - #{jordan.description}"
+                puts ""
+                sleep 4
+                display_jordans
+                puts ""
+                puts "Would you like to make another selection from the list above?"
+                puts "If not, type 'exit' to exit."
+                puts ""
+            elsif input == "exit"
+                puts ""
+                puts "Closing..."
+                sleep 1
+                puts "Thanks for visiting!!!"
+                exit
+            else 
+                puts ""
+                puts "That is not a valid request, please select a number from the list."
+                puts ""
+                sleep 2
+                display_jordans
+                menu
             end
         end
     end
 
-    def invalid_request
-        "That is not a valid request, please select a number from the list."
-        puts "\n"
-        display_jordans
-        menu
-    end
-
-    def goodbye
-        puts "Thanks for visiting!!!"
-        exit
-    end
 end
