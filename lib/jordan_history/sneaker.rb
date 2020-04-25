@@ -8,6 +8,10 @@ class JordanHistory::Sneaker
         @@all[index]
     end
 
+    def save
+        @@all << self
+    end
+
     attr_accessor :name, :release_date, :og_price, :designer, :description
 
     @@all = []
@@ -19,9 +23,5 @@ class JordanHistory::Sneaker
         @designer = designer
         @description = description
         save
-    end
-
-    def save
-        @@all << self
     end
 end

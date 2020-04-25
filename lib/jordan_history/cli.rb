@@ -60,7 +60,9 @@ class JordanHistory::CLI
                 puts "Description - #{jordan.description}"
                 puts ""
                 sleep 4
+
                 display_jordans
+                
                 puts ""
                 puts "Would you like to make another selection from the list above?"
                 puts "If not, type 'exit' to exit."
@@ -70,16 +72,17 @@ class JordanHistory::CLI
                 puts "Closing..."
                 sleep 1
                 puts "Thanks for visiting!!!"
+
                 exit
             else 
                 puts ""
                 puts "That is not a valid request, please select a number from the list."
                 puts ""
                 sleep 2
+                
                 display_jordans
                 menu
             end
         end
     end
-
 end
