@@ -33,7 +33,7 @@ class JordanHistory::CLI
 
     def display_jordans
         sneakers = JordanHistory::Sneaker.all
-        sneakers.each.with_index(1).each do |sneaker, index| 
+        sneakers.each.with_index(1) do |sneaker, index| 
             puts "#{index}. #{sneaker.name}"
         end
     end
