@@ -8,6 +8,10 @@ class JordanHistory::Sneaker
         @@all[index]
     end
 
+    def self.sorted_by_price
+        self.all.sort_by {|sneaker| sneaker.og_price.gsub("$", "").to_i}
+    end
+
     attr_accessor :name, :release_date, :og_price, :designer, :description
 
     @@all = []

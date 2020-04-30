@@ -51,7 +51,7 @@ class JordanHistory::CLI
         while input != "exit"
         input = gets.strip
 
-            if input.to_i > 0 && input.to_i < 35
+            if input.to_i > 0 && input.to_i <= JordanHistory::Sneaker.all.length
                 jordan = JordanHistory::Sneaker.find_by_index(input.to_i - 1)
                 puts "Name - #{jordan.name}"
                 puts "Release Date - #{jordan.release_date}"
@@ -65,6 +65,11 @@ class JordanHistory::CLI
                 puts "Would you like to make another selection from the list above?"
                 puts "If not, type 'exit' to exit."
                 puts ""
+            elsif input == "price"
+                JordanHistory::Sneaker.sorted_by_price.each do |sneaker|
+                    puts "Name - #{sneaker.name}. Price - #{sneaker.og_price}."
+                end
+                menu
             elsif input == "exit"
                 puts ""
                 puts "Closing..."
